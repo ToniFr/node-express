@@ -9,6 +9,7 @@
   "license": "MIT",
   "dependencies": {
     "@nano-sql/core": "^2.3.7",
+    "@splitsoftware/splitio": "^10.15.8",
     "express": "^4.17.1"
   },
   "devDependencies": {

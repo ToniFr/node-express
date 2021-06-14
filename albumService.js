@@ -10,6 +10,16 @@ const getAlbumById = async (id) => {
   return result;
 };
 
+const getAllRatedAlbums = async () => {
+  const result = await nSQL("albums").query("select", ["id", "name", "artist", "rating"]).exec();
+  return result;
+};
+
+const getRatedAlbumById = async (id) => {
+  const result = await nSQL("albums").query("select", ["id", "name", "artist", "rating"]).where(["id", "=", id]).exec();
+  return result;
+};
+
 const addAlbum = async (payload) => {
   const result = await nSQL("albums").query("upsert", payload).exec();
   return result;
@@ -27,7 +37,9 @@ const deleteAlbum = async (id) => {
 
 module.exports = {
   getAllAlbums,
+  getAllRatedAlbums,
   getAlbumById,
+  getRatedAlbumById,
   addAlbum,
   updateAlbum,
   deleteAlbum
