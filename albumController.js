@@ -1,24 +1,8 @@
 const albumService = require('./albumService');
-
-const SplitFactory = require('@splitsoftware/splitio').SplitFactory;
-
-const factory = SplitFactory({
-  core: {
-    authorizationKey: '7m4qctr1k6vi9kshbbu972vqm8nklom6qnjh'
-  }
-});
-
-const client = factory.client();
-
-const calculateTreatment = (request) => {
-  const key = request.headers['authorization'];
-  const treatment = client.getTreatment(key, 'album_split');
-
-  return treatment;
-};
+const treatmentService = require('./treatmentService');
 
 const getAllAlbums = async (request, response) => {
-  const treatment = calculateTreatment(request);
+  const treatment = treatmentService.calculateTreatment(request);
 
   const result = treatment === 'on' ? await albumService.getAllRatedAlbums() : await albumService.getAllAlbums();
   response.status(200).json(result);
@@ -26,7 +10,7 @@ const getAllAlbums = async (request, response) => {
 
 const getAlbumById = async (request, response) => {
   const id = parseInt(request.params.id);
-  const treatment = calculateTreatment(request);
+  const treatment = treatmentService.calculateTreatment(request);
 
   const result = treatment === 'on' ? await albumService.getRatedAlbumById(id) : await albumService.getAlbumById(id);
   response.status(200).json(result);
