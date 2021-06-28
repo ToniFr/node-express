@@ -1,22 +1,24 @@
 const nSQL = require("@nano-sql/core").nSQL;
+const treatmentService = require('./treatmentService');
 
-const getAllAlbums = async () => {
-  const result = await nSQL("albums").query("select", ["id", "name", "artist"]).exec();
+const getColumns = (key) => {
+  let columns = ["id", "name", "artist"];
+  const treatment = treatmentService.calculateTreatment(key);
+
+  if (treatment === 'on') {
+    columns.push('rating');
+  }
+
+  return columns;
+};
+
+const getAllAlbums = async (key) => {
+  const result = await nSQL("albums").query("select", getColumns(key)).exec();
   return result;
 };
 
-const getAlbumById = async (id) => {
-  const result = await nSQL("albums").query("select", ["id", "name", "artist"]).where(["id", "=", id]).exec();
-  return result;
-};
-
-const getAllRatedAlbums = async () => {
-  const result = await nSQL("albums").query("select", ["id", "name", "artist", "rating"]).exec();
-  return result;
-};
-
-const getRatedAlbumById = async (id) => {
-  const result = await nSQL("albums").query("select", ["id", "name", "artist", "rating"]).where(["id", "=", id]).exec();
+const getAlbumById = async (key, id) => {
+  const result = await nSQL("albums").query("select", getColumns(key)).where(["id", "=", id]).exec();
   return result;
 };
 
@@ -37,9 +39,7 @@ const deleteAlbum = async (id) => {
 
 module.exports = {
   getAllAlbums,
-  getAllRatedAlbums,
   getAlbumById,
-  getRatedAlbumById,
   addAlbum,
   updateAlbum,
   deleteAlbum

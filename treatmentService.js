@@ -8,8 +8,7 @@ const factory = SplitFactory({
 
 const client = factory.client();
 
-const calculateTreatment = (request) => {
-  const key = request.headers['authorization'];
+const calculateTreatment = (key) => {
   const treatment = client.getTreatment(key, 'album_split');
 
   return treatment;

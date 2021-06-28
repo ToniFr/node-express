@@ -1,18 +1,17 @@
 const albumService = require('./albumService');
-const treatmentService = require('./treatmentService');
 
 const getAllAlbums = async (request, response) => {
-  const treatment = treatmentService.calculateTreatment(request);
+  const key = request.headers['authorization'];
 
-  const result = treatment === 'on' ? await albumService.getAllRatedAlbums() : await albumService.getAllAlbums();
+  const result = await albumService.getAllAlbums(key);
   response.status(200).json(result);
 };
 
 const getAlbumById = async (request, response) => {
   const id = parseInt(request.params.id);
-  const treatment = treatmentService.calculateTreatment(request);
+  const key = request.headers['authorization'];
 
-  const result = treatment === 'on' ? await albumService.getRatedAlbumById(id) : await albumService.getAlbumById(id);
+  const result = await albumService.getAlbumById(key, id);
   response.status(200).json(result);
 };
 

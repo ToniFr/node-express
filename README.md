@@ -17,5 +17,6 @@ There are 3 major commits inside this repo:
 - step 1 -> codebase state after setting up Express server, in-memory database and CRUD endpoints
 - step 2 -> codebase state after adding split and introducing feature flag branching
 - step 3 -> codebase state after moving split logic into service
+- step 4 -> codebase state after making treatment service a dependecy of albums service
 
 Feel free to checkout any of these commits to test behaviour according to certain part of the tutorial.

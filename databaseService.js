@@ -23,7 +23,7 @@ const createDatabase = () => {
         rating: 4.7,
       },
       {
-        name: "Back In Pink",
+        name: "Back In Chartreuse",
         artist: "AC/DC",
         rating: 4.3,
       }
