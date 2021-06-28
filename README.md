@@ -12,7 +12,7 @@ Feel free to use curl or any REST client against API endpoints.
 
 ### How to test specific parts of the article?
 
-There are 3 major commits inside this repo:
+There are 4 major commits inside this repo:
 
 - step 1 -> codebase state after setting up Express server, in-memory database and CRUD endpoints
 - step 2 -> codebase state after adding split and introducing feature flag branching
